@@ -10,41 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	conditions_inside(char *str, int i, int *j)
+
+void    conditions_inside(char *str, int i)
 {
-	if ('A' <= str[i] && str[i] <= 'Z')
-	{
-		if (*j > 0)
-		{
-			str[i] += 32;
-		}
-		(*j)++;
-	}
-	else if ('a' <= str[i] && str[i] <= 'z')
-	{
-		if (*j == 0)
-		{
-			str[i] -= 32;
-		}
-		(*j)++;
-	}
-	else if ('0' <= str[i] && str[i] <= '9')
-		(*j)++;
-	else
-		(*j) = 0;
+
+    if (0x0 <= str[i] && str[i] <= 0x1F || str[i] == 0x7F)
+    {
+        str[i] = "%x";
+    }
+    
 }
 
-char	*ft_strcapitalize(char *str)
+void ft_putstr_non_printable(char *str)
 {
-	int	i;
-	int	j;
+    int    i;
 
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		conditions_inside(str, i, &j);
-		i++;
-	}
-	return (str);
+    i = 0;
+    while (str[i] != '\0')
+    {
+        conditions_inside(str, i);
+        i++;
+    }
 }
